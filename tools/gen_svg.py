@@ -108,9 +108,9 @@ rows = [
     ("focus", "вайбкодинг · AI-инструменты · DS/ML"),
     ("shell", "python · swift · typescript"),
     ("editor", "claude code"),
-    ("uptime", "с 2024 · вкатился с нуля, в 19"),
+    ("uptime", "вкатился в DS с нуля, в 19"),
     ("trials", "60+ техничек пройдено"),
-    ("tg", "@maxouniai · @fmiyc_tg"),
+    ("tg", "@maxouniai"),
     ("yt", "«Вся карта Data Science за 19 минут»"),
 ]
 for i, (k, v) in enumerate(rows):

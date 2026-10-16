@@ -5,7 +5,6 @@
 <br>
 
 [![maxouni | ai](https://img.shields.io/badge/maxouni%20%7C%20ai-%40maxouniai-1a1c1e?style=for-the-badge&logo=telegram&logoColor=aeb6be&labelColor=0e0f10)](https://t.me/maxouniai)
-[![Fire Me If You Can](https://img.shields.io/badge/Fire%20Me%20If%20You%20Can-%40fmiyc__tg-1a1c1e?style=for-the-badge&logo=telegram&logoColor=ff7a3d&labelColor=0e0f10)](https://t.me/fmiyc_tg)
 [![YouTube](https://img.shields.io/badge/youtube-%D0%92%D1%81%D1%8F%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0%20DS-1a1c1e?style=for-the-badge&logo=youtube&logoColor=aeb6be&labelColor=0e0f10)](https://www.youtube.com/watch?v=YIMZx5zFabQ)
 
 </div>
@@ -24,7 +23,6 @@
 ```text
 focus   ─  вайбкодинг · AI-инструменты · инженерка · DS/ML простым языком
 stack   ─  python · swift · typescript · claude code
-mood    ─  осознанная меркантильность, карьера в IT без розовых очков
 ```
 
 <br>
@@ -33,9 +31,9 @@ mood    ─  осознанная меркантильность, карьера
 
 ```text
 *   HEAD -> main   MagnitTech · Data Scientist
-*                  Wildberries · первая работа, 2 месяца до «ревью прогресса»
-*                  60+ техничек, несколько офферов, разборы в канале
-*                  2024, лето · вкат в DS с нуля после разговора с одноклассником
+*                  Wildberries · Data Scientist
+*                  60+ техничек, несколько офферов
+*                  вкат в DS с нуля после разговора с одноклассником
 | * universe       заказные студенческие работы · инвестиции · маркетинг   (dead ends)
 |/
 *   init           3 курс не айтишного вуза, 19 лет, ни одной строчки на Python
@@ -48,7 +46,6 @@ mood    ─  осознанная меркантильность, карьера
 | канал | о чём | |
 |:--|:--|:--|
 | **maxouni \| ai & vibecoding**<br>[`@maxouniai`](https://t.me/maxouniai) | Основной проект. Вайбкодинг, AI-инструменты, инженерка, DS/ML простым языком. Серия про ветки Data Science, гайды по монтажу видео с Claude Code, разборы инструментов. | [**открыть →**](https://t.me/maxouniai) |
-| **Fire Me If You Can**<br>[`@fmiyc_tg`](https://t.me/fmiyc_tg) | Личный канал. Карьера в IT, собеседования, зарплаты, накрутка опыта и осознанная меркантильность. Честно, включая историю с увольнением. | [**открыть →**](https://t.me/fmiyc_tg) |
 | **YouTube**<br>первое видео | **Вся карта Data Science за 19 минут.** Семь веток от Classic ML до HFT простыми словами и разбор, как по вакансии понять, куда тебя на самом деле зовут. Смонтировано целиком с Claude. | [**смотреть →**](https://www.youtube.com/watch?v=YIMZx5zFabQ) |
 
 <br>
@@ -120,7 +117,7 @@ $ whoami
 max
 
 $ man me | grep -i contact
-telegram → @maxouniai (канал) · @fmiyc_tg (личный)
+telegram → @maxouniai
 ```
 
 <br>
