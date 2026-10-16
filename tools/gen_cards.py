@@ -95,7 +95,7 @@ card("card-coil", 290, 250, "~/projects/coil", "coil",
      ["iOS-трекер привычек для iPhone:", "нативный дизайн, без рекламы и", "аккаунтов. Сила привычки, серии,", "статистика, виджеты, iCloud."],
      "Swift · SwiftUI · SwiftData", "приватный репозиторий", 12)
 card("card-mlsd", 290, 250, "~/projects/mlsd", "mlsd",
-     ["45 кейсов ML System Design с", "реальных собеседований. Сайт с", "фильтрами по направлению и", "домену, 12 доменов."],
+     ["Сборник из 45 кейсов по ML System", "Design. Сайт с фильтрами по", "направлению и домену,", "12 доменов."],
      "TypeScript · Vite · Pages", "aimnoux.github.io/mlsd  ↗", 12)
 card("card-mlcourse", 290, 250, "~/projects/mlcourse-ai", "mlcourse-ai",
      ["Форк открытого курса mlcourse.ai", "от OpenDataScience: лекции,", "статьи, домашки и решения —", "от Pandas до обучения без учителя."],
