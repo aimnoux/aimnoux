@@ -1,4 +1,4 @@
-"""Генерирует assets/hero.svg для README. Запуск: python3 tools/gen_svg.py"""
+"""Генерирует assets/hero.svg. Запуск: python3 tools/gen_svg.py"""
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -32,7 +32,7 @@ def pixel_logo(x0, y0, word):
     return "".join(out), x0 + cx * CELL
 
 
-W, H = 900, 500
+W, H = 900, 610
 CW = 8.4  # ширина символа при 14px
 lines = []  # (delay, svg)
 d = 0.0
@@ -106,10 +106,21 @@ for i, (k, v) in enumerate(rows):
     s.append(reveal(d + 0.5 + i * 0.18, t(40, yy, k, ACC, 14, 600) + t(40 + 9 * CW, yy, v, FG)))
 d2 = d + 0.5 + len(rows) * 0.18
 
-py = iy + 40 + len(rows) * 21 - 10
+# проекты
+qy = iy + 40 + len(rows) * 21 + 22
+s.append(reveal(d2 + 0.2, t(40, qy, "❯", ORANGE, 14, 700) + t(58, qy, "ls ~/projects", FG)))
+projects = [
+    ("coil", "iOS-трекер привычек · SwiftUI"),
+    ("mlsd", "45 кейсов ML System Design"),
+    ("mlcourse-ai", "открытый курс ML: домашки и решения"),
+]
+for i, (k, v) in enumerate(projects):
+    yy = qy + 26 + i * 21
+    s.append(reveal(d2 + 0.5 + i * 0.2, t(40, yy, k, HI, 14, 600) + t(40 + 14 * CW, yy, v, DIM)))
+py = qy + 26 + len(projects) * 21 - 20
 
 # промпт с курсором
-cy = py + 52
+cy = py + 56
 s.append(reveal(d2 + 0.5, t(40, cy, "❯", ORANGE, 14, 700) + f'<rect class="cur" x="{58}" y="{cy-13}" width="9" height="17" fill="{ORANGE}"/>'))
 
 s.append("</svg>")
