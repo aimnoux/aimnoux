@@ -4,7 +4,7 @@ from xml.sax.saxutils import escape
 
 OUT = Path(__file__).resolve().parent.parent / "assets"
 BG, WIN, S1, S2, MID = "#0e0f10", "#131517", "#1a1c1e", "#383c40", "#6b6f72"
-DIM, FG, ACC, HI, OR = "#9ba1a7", "#d9dcdf", "#aeb6be", "#ffffff", "#ff7a3d"
+DIM, FG, ACC, HI, OR = "#9ba1a7", "#d9dcdf", "#aeb6be", "#ffffff", "#ffffff"
 FONT = "'JetBrains Mono','SF Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace"
 STYLE = ("<style>.r{opacity:0;animation:in .01s forwards}@keyframes in{to{opacity:1}}"
          ".cur{animation:blink 1.1s steps(1) infinite}@keyframes blink{50%{opacity:0}}</style>")
@@ -55,7 +55,7 @@ pill("pill-mlsd", "mlsd", "кейсы", 190)
 pill("pill-gh", "github", "aimnoux", 210)
 
 # --- about + git log
-W, H = 900, 270
+W, H = 900, 170
 b = window(W, H, "about.md")
 b += r(0.2, t(24, 58, "❯", OR, 14, 700) + t(44, 58, "cat about.md", FG, 14))
 about = [
@@ -64,31 +64,8 @@ about = [
     "приложения, сайты и даже монтировать видео. Остальное — инженерка и DS/ML простым языком.",
 ]
 b += r(0.7, "".join(t(24, 84 + i * 20, ln, FG, 13.5) for i, ln in enumerate(about)))
-gy = 172
-b += r(1.4, t(24, gy, "❯", OR, 14, 700) + t(44, gy, "git log --graph --oneline", FG, 14))
-log = [
-    (OR, "*", "   ", "HEAD -> main", "MagnitTech · Data Scientist"),
-    (ACC, "*", "   ", "", "Wildberries · Data Scientist"),
-]
-for i, (c, star, _, tag, msg) in enumerate(log):
-    y = gy + 28 + i * 20
-    inner = t(24, y, star, c, 13.5, 700)
-    x = 24 + 3 * 8.1
-    if tag:
-        inner += t(x, y, "(" + tag + ")", OR, 13.5, 600)
-        x += (len(tag) + 3) * 8.1
-    inner += t(x, y, msg, FG if i == 0 else DIM, 13.5)
-    b += r(1.8 + i * 0.25, inner)
-b += r(3.3, t(24, H - 22, "❯", OR, 14, 700) + f'<rect class="cur" x="44" y="{H-35}" width="9" height="16" fill="{OR}"/>')
+b += r(1.4, t(24, H - 22, "❯", OR, 14, 700) + f'<rect class="cur" x="44" y="{H-35}" width="9" height="16" fill="{OR}"/>')
 (OUT / "about.svg").write_text(svg(W, H, b, "about"), encoding="utf-8")
-
-# --- медиа (2 карточки)
-card("card-tg", 440, 226, "~/media/maxouni", "maxouni | ai & vibecoding",
-     ["Вайбкодинг, AI-инструменты, инженерка,", "DS/ML простым языком.", "Серия про ветки Data Science, гайды",
-      "по монтажу и Claude Code."], "telegram · основной проект", "открыть @maxouniai  ↗", 13)
-card("card-yt", 440, 226, "~/media/youtube", "Вся карта Data Science за 19 минут",
-     ["Семь направлений от Classic ML до HFT", "простыми словами и разбор, как по", "вакансии понять, куда тебя зовут.",
-      "Смонтировано целиком с Claude."], "youtube · первое видео", "смотреть  ↗", 13)
 
 # --- проекты (3 карточки)
 card("card-coil", 290, 250, "~/projects/coil", "coil",

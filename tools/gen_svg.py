@@ -1,11 +1,11 @@
-"""Генерирует assets/hero.svg и assets/footer.svg для README. Запуск: python3 tools/gen_svg.py"""
+"""Генерирует assets/hero.svg для README. Запуск: python3 tools/gen_svg.py"""
 from pathlib import Path
 from xml.sax.saxutils import escape
 
 OUT = Path(__file__).resolve().parent.parent / "assets"
 
 BG, WIN, S1, S2, MID = "#0e0f10", "#131517", "#1a1c1e", "#383c40", "#6b6f72"
-DIM, FG, ACC, HI, ORANGE = "#9ba1a7", "#d9dcdf", "#aeb6be", "#ffffff", "#ff7a3d"
+DIM, FG, ACC, HI, ORANGE = "#9ba1a7", "#d9dcdf", "#aeb6be", "#ffffff", "#ffffff"
 FONT = "'JetBrains Mono','JetBrainsMono Nerd Font','SF Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace"
 
 GLYPHS = {
@@ -32,7 +32,7 @@ def pixel_logo(x0, y0, word):
     return "".join(out), x0 + cx * CELL
 
 
-W, H = 900, 610
+W, H = 900, 500
 CW = 8.4  # ширина символа при 14px
 lines = []  # (delay, svg)
 d = 0.0
@@ -68,7 +68,7 @@ s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox=
 # polybar
 s.append(f'<rect x="0" y="0" width="{W}" height="34" rx="14" fill="{S1}"/><rect x="0" y="14" width="{W}" height="20" fill="{S1}"/>')
 s.append(t(18, 22, "aimnoux", FG, 13, 600) + t(18 + 8 * CW, 22, "~ github", DIM, 13))
-s.append(t(W - 18, 22, "claude-code ● running   main ✓", DIM, 13, extra='text-anchor="end"'))
+s.append(t(W - 18, 22, "main ✓", DIM, 13, extra='text-anchor="end"'))
 
 # окно
 wx, wy, ww, wh = 20, 50, W - 40, H - 70
@@ -99,33 +99,14 @@ rows = [
     ("prev", "Wildberries"),
     ("focus", "вайбкодинг · AI-инструменты · DS/ML"),
     ("shell", "python · swift · typescript"),
-    ("editor", "claude code"),
     ("tg", "@maxouniai"),
-    ("yt", "«Вся карта Data Science за 19 минут»"),
 ]
 for i, (k, v) in enumerate(rows):
     yy = iy + 40 + i * 21
     s.append(reveal(d + 0.5 + i * 0.18, t(40, yy, k, ACC, 14, 600) + t(40 + 9 * CW, yy, v, FG)))
 d2 = d + 0.5 + len(rows) * 0.18
 
-# справа: «sysmon»
-px = 560
-s.append(reveal(d + 0.4, t(px, iy, "~/stack", ACC, 14, 600) + t(px, iy + 17, "─" * 30, S2)))
-bars = [("ml", 0.92), ("swift", 0.58), ("ts", 0.55), ("vibes", 1.0), ("sleep", 0.18)]
-for i, (k, v) in enumerate(bars):
-    yy = iy + 40 + i * 21
-    bx, bw = px + 7 * CW, 160
-    col = ORANGE if k == "vibes" else ACC
-    s.append(reveal(d + 0.7 + i * 0.18,
-                    t(px, yy, k, DIM)
-                    + f'<rect x="{bx}" y="{yy-11}" width="{bw}" height="11" rx="2" fill="{S1}" stroke="{S2}" stroke-width=".5"/>'
-                    + f'<rect x="{bx}" y="{yy-11}" width="{bw*v:.0f}" height="11" rx="2" fill="{col}"/>'))
-
-# палитра
-py = iy + 40 + len(rows) * 21 + 10
-sw = [BG, S1, S2, MID, DIM, FG, ACC, HI, ORANGE]
-sv = "".join(f'<rect x="{40 + i*30}" y="{py}" width="30" height="18" fill="{c}" stroke="{S2}" stroke-width=".5"/>' for i, c in enumerate(sw))
-s.append(reveal(d2 + 0.2, sv))
+py = iy + 40 + len(rows) * 21 - 10
 
 # промпт с курсором
 cy = py + 52
@@ -133,17 +114,3 @@ s.append(reveal(d2 + 0.5, t(40, cy, "❯", ORANGE, 14, 700) + f'<rect class="cur
 
 s.append("</svg>")
 (OUT / "hero.svg").write_text("\n".join(s), encoding="utf-8")
-
-# футер
-FW, FH = 900, 70
-f = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{FW}" height="{FH}" viewBox="0 0 {FW} {FH}" font-family="{FONT}">',
-     '<title>~ ❯</title>',
-     f'<style>.cur{{animation:blink 1.1s steps(1) infinite}}@keyframes blink{{50%{{opacity:0}}}}</style>',
-     f'<rect width="{FW}" height="{FH}" rx="12" fill="{BG}"/>',
-     f'<rect x="0" y="0" width="{FW}" height="2" fill="{S2}"/>',
-     t(24, 30, "❯", ORANGE, 14, 700), t(42, 30, "exit 0", FG),
-     t(24, 54, "rice: графит + серебро · один акцент — свет · собрано вместе с Claude Code", DIM, 12),
-     f'<rect class="cur" x="106" y="17" width="9" height="17" fill="{ORANGE}"/>',
-     "</svg>"]
-(OUT / "footer.svg").write_text("\n".join(f), encoding="utf-8")
-print("ok")
