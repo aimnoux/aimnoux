@@ -1,11 +1,11 @@
-"""Генерирует assets/hero.svg. Запуск: python3 tools/gen_svg.py"""
+"""Генерирует assets/hero.svg и кнопки assets/btn-*.svg. Запуск: python3 tools/gen_svg.py"""
 from pathlib import Path
 from xml.sax.saxutils import escape
 
 OUT = Path(__file__).resolve().parent.parent / "assets"
 
 BG, WIN, S1, S2, MID = "#0e0f10", "#131517", "#1a1c1e", "#383c40", "#6b6f72"
-DIM, FG, ACC, HI, ORANGE = "#9ba1a7", "#d9dcdf", "#aeb6be", "#ffffff", "#ffffff"
+DIM, FG, ACC, HI, ORANGE = "#9ba1a7", "#d9dcdf", "#aeb6be", "#ffffff", "#f0883e"
 FONT = "'JetBrains Mono','JetBrainsMono Nerd Font','SF Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace"
 
 GLYPHS = {
@@ -68,7 +68,7 @@ s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox=
 # polybar
 s.append(f'<rect x="0" y="0" width="{W}" height="34" rx="14" fill="{S1}"/><rect x="0" y="14" width="{W}" height="20" fill="{S1}"/>')
 s.append(t(18, 22, "aimnoux", FG, 13, 600) + t(18 + 8 * CW, 22, "~ github", DIM, 13))
-s.append(t(W - 18, 22, "main ✓", DIM, 13, extra='text-anchor="end"'))
+s.append(t(W - 18, 22, "✓", ORANGE, 13, 700, extra='text-anchor="end"') + t(W - 32, 22, "main", DIM, 13, extra='text-anchor="end"'))
 
 # окно
 wx, wy, ww, wh = 20, 50, W - 40, H - 70
@@ -116,7 +116,8 @@ rows = [
 for i, (k, v) in enumerate(rows):
     yy = iy + 36 + i * 28
     st = stripe(yy) if i % 2 == 0 else ""
-    s.append(reveal(d + 0.5 + i * 0.18, st + t(48, yy, k, DIM, 15, 500) + t(48 + 9 * CW5, yy, v, HI, 15, 600)))
+    vc = ORANGE if k == "tg" else HI
+    s.append(reveal(d + 0.5 + i * 0.18, st + t(48, yy, k, DIM, 15, 500) + t(48 + 9 * CW5, yy, v, vc, 15, 600)))
 d2 = d + 0.5 + len(rows) * 0.18
 
 # проекты
@@ -131,8 +132,8 @@ for i, (k, v, tag) in enumerate(projects):
     yy = qy + 36 + i * 28
     st = stripe(yy) if i % 2 == 0 else ""
     cw = (len(tag) + 2) * 7.8
-    chip = (f'<rect x="{RX1-8-cw:.0f}" y="{yy-14}" width="{cw:.0f}" height="18" rx="9" fill="none" stroke="{MID}"/>'
-            + t(RX1 - 8 - cw / 2, yy - 1, tag, ACC, 12).replace("<text ", '<text text-anchor="middle" '))
+    chip = (f'<rect x="{RX1-8-cw:.0f}" y="{yy-14}" width="{cw:.0f}" height="18" rx="9" fill="{ORANGE}" fill-opacity=".12" stroke="{ORANGE}" stroke-opacity=".6"/>'
+            + t(RX1 - 8 - cw / 2, yy - 1, tag, ORANGE, 12, 500).replace("<text ", '<text text-anchor="middle" '))
     s.append(reveal(d2 + 0.5 + i * 0.2, st + t(48, yy, k, HI, 15, 700) + t(48 + 14 * CW5, yy, v, FG, 15) + chip))
 py = qy + 36 + len(projects) * 28
 
@@ -142,3 +143,40 @@ s.append(reveal(d2 + 0.5, t(40, cy, "❯", ORANGE, 15, 700) + f'<rect class="cur
 
 s.append("</svg>")
 (OUT / "hero.svg").write_text("\n".join(s), encoding="utf-8")
+
+
+# --- кнопки под терминалом: SVG-пилюли, в README обёрнуты в <a>
+ICONS = {
+    # Feather icons (MIT), viewBox 24, stroke
+    "send": '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>',
+    "play": '<polygon points="5 3 19 12 5 21 5 3"/>',
+    "layers": '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+    "book": '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+}
+BH = 44
+
+
+def button(name, icon, label, hint, primary=False):
+    w = 16 + 24 + 10 + len(label) * 8.4 + (len(hint) * 7.2 + 10 if hint else 0) + 18
+    w = round(w)
+    fill = ORANGE if primary else S1
+    stroke = ORANGE if primary else S2
+    ic = BG if primary else ORANGE
+    lc = BG if primary else HI
+    hc = "#5a2e10" if primary else DIM
+    b = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{BH}" viewBox="0 0 {w} {BH}" font-family="{FONT}">',
+         f'<title>{escape(label + (" " + hint if hint else ""))}</title>',
+         f'<rect x=".5" y=".5" width="{w-1}" height="{BH-1}" rx="9" fill="{fill}" stroke="{stroke}"/>',
+         f'<g transform="translate(16 {BH/2-10}) scale(.83)" fill="none" stroke="{ic}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">{ICONS[icon]}</g>',
+         t(16 + 24 + 10, BH / 2 + 5, label, lc, 14, 700)]
+    if hint:
+        b.append(t(16 + 24 + 10 + len(label) * 8.4 + 10, BH / 2 + 5, hint, hc, 12))
+    b.append("</svg>")
+    (OUT / f"btn-{name}.svg").write_text("\n".join(b), encoding="utf-8")
+
+
+button("telegram", "send", "Telegram", "@maxouniai", primary=True)
+button("youtube", "play", "YouTube", "карта Data Science")
+button("mlsd", "layers", "MLSD", "45 кейсов")
+button("mlcourse", "book", "mlcourse-ai", "")
+print("ok")
