@@ -67,15 +67,7 @@ s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox=
 
 # polybar
 s.append(f'<rect x="0" y="0" width="{W}" height="34" rx="14" fill="{S1}"/><rect x="0" y="14" width="{W}" height="20" fill="{S1}"/>')
-x = 18
-for i, (n, name) in enumerate([(1, "about"), (2, "career"), (3, "media"), (4, "projects")]):
-    act = i == 0
-    w = (len(name) + 3) * CW
-    if act:
-        s.append(f'<rect x="{x-6}" y="6" width="{w+8}" height="22" rx="5" fill="{S2}"/>')
-        s.append(f'<rect x="{x-6}" y="26" width="{w+8}" height="2" fill="{ORANGE}"/>')
-    s.append(t(x, 22, f"{n} {name}", FG if act else DIM, 13, 600 if act else 400))
-    x += w + 16
+s.append(t(18, 22, "aimnoux", FG, 13, 600) + t(18 + 8 * CW, 22, "~ github", DIM, 13))
 s.append(t(W - 18, 22, "claude-code ● running   main ✓", DIM, 13, extra='text-anchor="end"'))
 
 # окно
