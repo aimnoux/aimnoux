@@ -100,8 +100,6 @@ rows = [
     ("focus", "вайбкодинг · AI-инструменты · DS/ML"),
     ("shell", "python · swift · typescript"),
     ("editor", "claude code"),
-    ("uptime", "вкатился в DS с нуля, в 19"),
-    ("trials", "60+ техничек пройдено"),
     ("tg", "@maxouniai"),
     ("yt", "«Вся карта Data Science за 19 минут»"),
 ]

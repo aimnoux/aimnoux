@@ -55,23 +55,20 @@ pill("pill-mlsd", "mlsd", "кейсы", 190)
 pill("pill-gh", "github", "aimnoux", 210)
 
 # --- about + git log
-W, H = 900, 404
+W, H = 900, 270
 b = window(W, H, "about.md")
 b += r(0.2, t(24, 58, "❯", OR, 14, 700) + t(44, 58, "cat about.md", FG, 14))
 about = [
     "Привет, я Макс. Data Scientist в MagnitTech, раньше был в Wildberries.",
-    "В DS пришёл с нуля в 19 лет, без профильного образования, прошёл 60+ техничек.",
     "Сейчас пишу про вайбкодинг и AI-инструменты: как с Claude Code собирать",
     "приложения, сайты и даже монтировать видео. Остальное — инженерка и DS/ML простым языком.",
 ]
 b += r(0.7, "".join(t(24, 84 + i * 20, ln, FG, 13.5) for i, ln in enumerate(about)))
-gy = 192
+gy = 172
 b += r(1.4, t(24, gy, "❯", OR, 14, 700) + t(44, gy, "git log --graph --oneline", FG, 14))
 log = [
     (OR, "*", "   ", "HEAD -> main", "MagnitTech · Data Scientist"),
     (ACC, "*", "   ", "", "Wildberries · Data Scientist"),
-    (ACC, "*", "   ", "", "60+ техничек, несколько офферов"),
-    (ACC, "*", "   ", "", "вкат в DS с нуля после разговора с одноклассником"),
 ]
 for i, (c, star, _, tag, msg) in enumerate(log):
     y = gy + 28 + i * 20
@@ -82,9 +79,6 @@ for i, (c, star, _, tag, msg) in enumerate(log):
         x += (len(tag) + 3) * 8.1
     inner += t(x, y, msg, FG if i == 0 else DIM, 13.5)
     b += r(1.8 + i * 0.25, inner)
-y = gy + 28 + 4 * 20
-b += r(2.9, t(24, y, "| ", MID, 13.5) + t(24 + 2 * 8.1, y, "*", MID, 13.5, 700) + t(24 + 4 * 8.1, y, "заказные студенческие работы · инвестиции · маркетинг", MID, 13.5)
-        + t(24, y + 20, "|/", MID, 13.5) + t(24, y + 40, "*", ACC, 13.5, 700) + t(24 + 3 * 8.1, y + 40, "3 курс не айтишного вуза, ни одной строчки на Python", DIM, 13.5))
 b += r(3.3, t(24, H - 22, "❯", OR, 14, 700) + f'<rect class="cur" x="44" y="{H-35}" width="9" height="16" fill="{OR}"/>')
 (OUT / "about.svg").write_text(svg(W, H, b, "about"), encoding="utf-8")
 
