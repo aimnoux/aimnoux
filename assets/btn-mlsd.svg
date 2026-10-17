@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="176" height="44" viewBox="0 0 176 44" font-family="'JetBrains Mono','JetBrainsMono Nerd Font','SF Mono',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace">
-<title>MLSD 45 кейсов</title>
-<rect x=".5" y=".5" width="175" height="43" rx="9" fill="#1a1c1e" stroke="#383c40"/>
-<g transform="translate(16 12.0) scale(.83)" fill="none" stroke="#f0883e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></g>
-<text x="50" y="27.0" fill="#ffffff" font-size="14" font-weight="700" xml:space="preserve" >MLSD</text>
-<text x="93.6" y="27.0" fill="#9ba1a7" font-size="12" font-weight="400" xml:space="preserve" >45 кейсов</text>
-</svg>
