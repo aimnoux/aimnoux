@@ -1,0 +1,54 @@
+<!doctype html>
+<!-- Static README blocks. tools/render.mjs screenshots every .blk to assets/*.png.
+     The stats block is not here: tools/stats.py draws it as SVG (refreshed daily by Actions). -->
+<html lang="en"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Onest;src:url(fonts/Onest-Regular.ttf);font-weight:400}
+@font-face{font-family:Onest;src:url(fonts/Onest-Bold.ttf);font-weight:700}
+@font-face{font-family:JBM;src:url(fonts/JetBrainsMono-Regular.ttf);font-weight:400}
+@font-face{font-family:JBM;src:url(fonts/JetBrainsMono-Medium.ttf);font-weight:500}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:transparent;width:830px}
+#rm{display:flex;flex-direction:column;gap:16px;width:830px}
+.blk{position:relative;border-radius:8px;overflow:hidden;font-family:Onest;padding:24px 32px}
+.blk>*:not(.fx){position:relative}
+.row{display:flex;gap:16px}.row>*{flex:1}
+.mono{font-family:JBM,monospace}
+.H{font-weight:700;text-transform:uppercase;letter-spacing:-.01em;line-height:1.02}
+.top{display:flex;justify-content:space-between;font-family:JBM;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin:-8px 0 20px}
+.top i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff2a1f;margin-right:7px;vertical-align:1px}
+.hl{display:inline-block;background:var(--hb);color:var(--hf);padding:2px 10px 4px}
+.mu{color:var(--mu)}.red{color:#ff2a1f}
+.fx{position:absolute;inset:0;font-family:JBM;font-size:13px;color:var(--fxc)}
+.fx span{position:absolute}
+.wv{display:flex;align-items:center;justify-content:space-between;gap:2px}
+.wv b{display:block;width:2px;background:var(--wv);border-radius:1px}
+.ttl{font-size:26px;margin:4px 0 18px}
+.card{border:1.5px solid var(--ln);border-radius:4px}
+/* blue + paper, as in the «Editing with Claude» course */
+.A{background:#0a18ef;color:#fff;--mu:rgba(255,255,255,.62);--ln:rgba(255,255,255,.9);--hb:#fff;--hf:#0a18ef;--fxc:rgba(255,255,255,.16);--wv:#fff}
+.B{background:#f3f1ec;color:#0a18ef;--mu:rgba(10,24,239,.6);--ln:#0a18ef;--hb:#0a18ef;--hf:#fff;--fxc:rgba(10,24,239,.12);--wv:#0a18ef}
+</style></head>
+<body><div id="rm"></div>
+<script>
+let seed=1656;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+function fx(n){let s='<div class="fx">';const ch='/-=+.:#|\\';for(let i=0;i<n;i++){const c=()=>ch[Math.floor(rnd()*ch.length)];s+=`<span style="left:${(rnd()*100).toFixed(1)}%;top:${(rnd()*100).toFixed(1)}%">${c()}${rnd()<.3?c():''}</span>`}return s+'</div>'}
+function wave(n,h,dim){let s=`<div class="wv" style="height:${h}px">`;for(let i=0;i<n;i++){const e=.35+.65*Math.abs(Math.sin(i/9))*(.5+.5*Math.sin(i/23+1));const v=Math.max(.06,e*(.3+.7*rnd()));s+=`<b style="height:${(v*h).toFixed(0)}px;${i>n*(1-dim)?'opacity:.35':''}"></b>`}return s+'</div>'}
+const blk=(id,cls,body,n=40)=>`<div class="blk ${cls}" id="${id}">${fx(n)}${body}</div>`;
+const T=(l,b)=>`<div class="H ttl">${l}</div>${b}`;
+const MEDIA=[['YouTube','long videos and the «Editing with Claude» course'],['Telegram','guides, prompts and materials — free'],['Instagram','reels: AI tools in a minute']];
+const ML=[['mlsd','45 ML System Design interview cases — website','aimnoux.github.io/mlsd'],['mlcourse-ai','Russian edition of the open mlcourse.ai course','★ 8 · fork']];
+document.getElementById('rm').innerHTML=[
+ blk('hero','B',`<div class="top"><span><i></i>maxouni</span><span>github · readme</span></div>
+  <div class="H" style="font-size:132px;letter-spacing:-.045em;line-height:.88">MAXOUNI</div>
+  <div class="H" style="font-size:34px;margin-top:16px"><span class="hl">AI & VIBECODING</span></div>
+  <div class="mono card" style="font-size:13px;margin:24px 0 16px;padding:8px 12px">&gt; vibecoding &amp; ai tools in plain words<span class="red"> ▌</span></div>
+  ${wave(190,56,.25)}`,80),
+ blk('work','A',T('work',`<div class="row" style="gap:24px;align-items:flex-end">
+  <div><div class="mono mu" style="font-size:11px;margin-bottom:8px">now</div><div class="H" style="font-size:40px">ML engineer</div><div class="H" style="font-size:28px;margin-top:6px"><span class="hl">@ MagnitTech</span></div></div>
+  <div><div class="mono mu" style="font-size:11px;margin-bottom:8px">before</div><div class="H" style="font-size:28px;opacity:.55">ex-Wildberries</div><div class="mono mu" style="font-size:12px;margin-top:8px">ML engineer</div></div></div>`)),
+ blk('media','B',T('where to watch',`<div class="row" style="gap:24px">${MEDIA.map(c=>`<div><div class="H" style="font-size:22px;margin-bottom:8px"><span class="hl">${c[0]}</span></div><div style="font-size:13px;line-height:1.4">${c[1]}</div><div class="mono mu" style="font-size:11px;margin-top:8px">@maxouniai →</div></div>`).join('')}</div>`)),
+ blk('main','A',T('main projects',`<div class="card" style="padding:10px 14px;display:flex;gap:16px;align-items:center"><span class="mono" style="font-size:13px;font-weight:500;width:190px">maxouni-editflow</span><span style="font-size:13px;flex:1">video editing with Claude Code: pipeline and skills</span><span class="mono mu" style="font-size:11px">Python</span></div>`)),
+ blk('dsml','B',T('ds/ml projects',`<div class="row">${ML.map(r=>`<div class="card" style="padding:14px 16px"><div class="mono" style="font-size:14px;font-weight:500"><span class="red">●</span> ${r[0]}</div><div style="font-size:13px;margin:8px 0;line-height:1.4">${r[1]}</div><div class="mono mu" style="font-size:11px">${r[2]}</div></div>`).join('')}</div>`)),
+].join('');
+</script></body></html>
